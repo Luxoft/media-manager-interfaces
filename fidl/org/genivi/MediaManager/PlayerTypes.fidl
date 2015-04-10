@@ -48,6 +48,7 @@ typeCollection PlayerTypes {
     enumeration PlaybackStatus {
         PLAYING
         PAUSED
+        STOPPED
     }
 
 }
