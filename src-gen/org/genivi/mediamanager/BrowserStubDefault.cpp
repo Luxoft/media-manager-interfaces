@@ -271,6 +271,18 @@ void BrowserStubDefault::createReference(std::string path, std::string objectPat
 }
 
 
+/**
+ * Emitted when the list of media managers has changed.
+ */
+void BrowserStubDefault::fireLostServerEvent(const std::string& serverIdentifier) {
+    stubAdapter_->fireLostServerEvent(serverIdentifier);
+}
+/**
+ * Emitted when the list of media managers has changed.
+ */
+void BrowserStubDefault::fireFoundServerEvent(const std::string& serverIdentifier) {
+    stubAdapter_->fireFoundServerEvent(serverIdentifier);
+}
 
 
 BrowserStubDefault::RemoteEventHandler::RemoteEventHandler(BrowserStubDefault* defaultStub):

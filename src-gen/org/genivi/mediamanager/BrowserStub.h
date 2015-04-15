@@ -24,6 +24,7 @@
 #include <CommonAPI/SerializableStruct.h>
 #include <cstdint>
 #include <string>
+#include <unordered_set>
 #include <vector>
 
 #include <CommonAPI/Stub.h>
@@ -43,6 +44,16 @@ namespace mediamanager {
 class BrowserStubAdapter: virtual public CommonAPI::StubAdapter, public Browser {
  public:
 
+    /**
+     * Sends a broadcast event for lostServer. Should not be called directly.
+     * Instead, the "fire<broadcastName>Event" methods of the stub should be used.
+     */
+    virtual void fireLostServerEvent(const std::string& serverIdentifier) = 0;
+    /**
+     * Sends a broadcast event for foundServer. Should not be called directly.
+     * Instead, the "fire<broadcastName>Event" methods of the stub should be used.
+     */
+    virtual void fireFoundServerEvent(const std::string& serverIdentifier) = 0;
 
 
     virtual void deactivateManagedInstances() = 0;
@@ -257,6 +268,16 @@ public:
      */
     /// This is the method that will be called on remote calls on the method createReference.
     virtual void createReference(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, std::string objectPath, std::string& pathIdentifier, BrowserTypes::BrowserError& e) = 0;
+    /**
+     * Emitted when the list of media managers has changed.
+     */
+    /// Sends a broadcast event for lostServer.
+    virtual void fireLostServerEvent(const std::string& serverIdentifier) = 0;
+    /**
+     * Emitted when the list of media managers has changed.
+     */
+    /// Sends a broadcast event for foundServer.
+    virtual void fireFoundServerEvent(const std::string& serverIdentifier) = 0;
 
     using CommonAPI::Stub<BrowserStubAdapter, BrowserStubRemoteEvent>::initStubAdapter;
     typedef CommonAPI::Stub<BrowserStubAdapter, BrowserStubRemoteEvent>::StubAdapterType StubAdapterType;

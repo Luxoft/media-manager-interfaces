@@ -220,6 +220,14 @@ public:
     virtual void createReference(std::string path, std::string objectPath, std::string& pathIdentifier, BrowserTypes::BrowserError& e);
 
 
+    /**
+     * Emitted when the list of media managers has changed.
+     */
+    virtual void fireLostServerEvent(const std::string& serverIdentifier);
+    /**
+     * Emitted when the list of media managers has changed.
+     */
+    virtual void fireFoundServerEvent(const std::string& serverIdentifier);
 
 
 protected:

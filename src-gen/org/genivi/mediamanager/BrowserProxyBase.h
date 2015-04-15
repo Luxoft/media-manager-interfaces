@@ -25,6 +25,7 @@
 #include <string>
 #include <vector>
 
+#include <CommonAPI/Event.h>
 #include <CommonAPI/Proxy.h>
 #include <functional>
 #include <future>
@@ -37,6 +38,8 @@ namespace mediamanager {
 
 class BrowserProxyBase: virtual public CommonAPI::Proxy {
  public:
+    typedef CommonAPI::Event<std::string> LostServerEvent;
+    typedef CommonAPI::Event<std::string> FoundServerEvent;
 
     typedef std::function<void(const CommonAPI::CallStatus&, const std::vector<std::string>&, const BrowserTypes::BrowserError&)> DiscoverMediaManagersAsyncCallback;
     typedef std::function<void(const CommonAPI::CallStatus&, const MediaTypes::ResultMapList&, const BrowserTypes::BrowserError&)> ListContainersAsyncCallback;
@@ -52,6 +55,14 @@ class BrowserProxyBase: virtual public CommonAPI::Proxy {
     typedef std::function<void(const CommonAPI::CallStatus&, const std::string&, const BrowserTypes::BrowserError&)> CreateReferenceAsyncCallback;
 
 
+    /**
+     * Emitted when the list of media managers has changed.
+     */
+    virtual LostServerEvent& getLostServerEvent() = 0;
+    /**
+     * Emitted when the list of media managers has changed.
+     */
+    virtual FoundServerEvent& getFoundServerEvent() = 0;
 
     /**
      * Return a list of all media manager identifiers. These are

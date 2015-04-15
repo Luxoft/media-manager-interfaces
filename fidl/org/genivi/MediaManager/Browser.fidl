@@ -289,4 +289,23 @@ interface Browser {
             BrowserError e
         }
     }
+
+    
+    <** @description: Emitted when the list of media managers has changed. 
+        @param: serverIdentifier: path of the server that disappeared
+    **>
+    broadcast lostServer {
+        out {
+            String serverIdentifier
+        }
+    }
+
+    <** @description: Emitted when the list of media managers has changed. 
+        @param: serverIdentifier: path of the server that appeared
+    **>
+    broadcast foundServer {
+        out {
+            String serverIdentifier
+        }
+    }
 }

@@ -33,6 +33,24 @@ public:
 
 
 
+    /**
+     * Emitted when the list of media managers has changed.
+     */
+    /**
+     * Returns the wrapper class that provides access to the broadcast lostServer.
+     */
+    virtual LostServerEvent& getLostServerEvent() {
+        return delegate_->getLostServerEvent();
+    }
+    /**
+     * Emitted when the list of media managers has changed.
+     */
+    /**
+     * Returns the wrapper class that provides access to the broadcast foundServer.
+     */
+    virtual FoundServerEvent& getFoundServerEvent() {
+        return delegate_->getFoundServerEvent();
+    }
 
     /**
      * Return a list of all media manager identifiers. These are
